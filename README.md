@@ -1,2 +1,2 @@
 # TaskManager
-Task manager T1
+Task manager для компании T1
