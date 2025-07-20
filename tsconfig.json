@@ -1,0 +1,9 @@
+{
+  "files": [],
+  "references": [
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}
