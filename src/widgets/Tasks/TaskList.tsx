@@ -10,7 +10,7 @@ export const TaskList = ({ tasks, onEdit }: TaskListProps) => {
     return (
         <Grid container spacing={2}>
             {tasks.map((task) => (
-                <Grid item xs={12} sm={6} md={4} key={task.id} sx={{ display: 'flex' }}>
+                <Grid size={{xs: 12, sm: 6, md: 4}} key={task.id} sx={{ display: 'flex' }} >
                     <TaskItem
                         {...task}
                         onEdit={() => onEdit?.(task)}

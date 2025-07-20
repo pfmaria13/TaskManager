@@ -18,7 +18,7 @@ export const Filter = ({ label, options, value, onChange }: FilterProps) => {
     };
 
     return (
-        <FormControl sx={{ minWidth: 180 }} fullWidth>
+        <FormControl sx={{ minWidth: 180, maxWidth: 250}}>
             <InputLabel sx={{ fontSize: '0.9rem', top: -6 }}>{label}</InputLabel>
             <Select
                 value={value}

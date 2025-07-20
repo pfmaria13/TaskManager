@@ -78,10 +78,10 @@ export const HomePage = () => {
     return (
         <div className={styles.container}>
             <Header />
-            <main className={styles.main}>
+            <main>
                 <SearchLine value={searchQuery} onChange={setSearchQuery} />
                 <Grid container spacing={2} sx={{ mb: 2 }}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid size={{xs:12, sm: 4}}>
                         <Filter
                             label="Категория"
                             options={['Bug', 'Feature', 'Documentation', 'Refactor', 'Test']}
@@ -89,7 +89,7 @@ export const HomePage = () => {
                             onChange={setCategoryFilter}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid size={{xs:12, sm: 4}}>
                         <Filter
                             label="Статус"
                             options={['To Do', 'In Progress', 'Done']}
@@ -97,7 +97,7 @@ export const HomePage = () => {
                             onChange={setStatusFilter}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid size={{xs:12, sm: 4}}>
                         <Filter
                             label="Приоритет"
                             options={['Low', 'Medium', 'High']}

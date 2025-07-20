@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client'
 import './shared/styles/reset.css';
-import App from './App.tsx'
+import App from './App'
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './shared/config/mui/theme';
 import {BrowserRouter} from "react-router-dom";
