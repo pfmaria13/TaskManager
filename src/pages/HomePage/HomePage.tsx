@@ -1,122 +1,88 @@
-import { Header } from "../../widgets/Header/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Grid, Button } from "@mui/material";
+import { Header } from "@/shared/ui/Header/Header";
+import { Filter } from "@/shared/ui/Filters/Filter";
+import { SearchLine } from "@/shared/ui/Filters/SearchLine";
+import { TaskList } from "@entities/task/ui/TaskList";
+import { setFilter } from "@entities/task/model/taskSlice";
+import { selectFilters } from "@entities/task/model/selectors";
 import styles from "./HomePage.module.css";
-import { TaskList } from "../../widgets/Tasks/TaskList";
-import { TaskItemProps } from "../../widgets/Tasks/TaskItem";
-import { TaskDetails } from "../../widgets/Tasks/TaskDetails";
-import { useState, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Filter } from "../../widgets/Filters/Filter";
-import { SearchLine } from "../../widgets/Filters/SearchLine"; // Обновлено имя компонента
-import { Grid } from '@mui/material';
+import AddIcon from "@mui/icons-material/Add";
 
 export const HomePage = () => {
-    const navigate = useNavigate();
-    const { id } = useParams<{ id?: string }>();
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilters);
 
-    const [tasks, setTasks] = useState<TaskItemProps[]>([
-        {
-            id: '1',
-            header: 'Добавить авторизацию',
-            description: 'Реализовать OAuth2 через GitHub',
-            category: 'Feature',
-            status: 'To Do',
-            priority: 'High',
-        },
-        {
-            id: '2',
-            header: 'Исправить баг с отображением',
-            description: 'Ошибка при загрузке главной страницы',
-            category: 'Bug',
-            status: 'In Progress',
-            priority: 'Medium',
-        },
-        {
-            id: '3',
-            header: 'Обновить документацию',
-            description: 'Добавить раздел по API',
-            category: 'Documentation',
-            status: 'Done',
-            priority: 'Low',
-        },
-    ]);
+  return (
+    <div className={styles.container}>
+      <Header />
+      <main>
+        <SearchLine
+          value={filters.searchQuery}
+          onChange={(value) => dispatch(setFilter({ searchQuery: value }))}
+        />
+        <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Grid
+            sx={{
+              mb: 2,
+              display: "flex",
+              flexWrap: "wrap",
+              gap: {
+                xs: "10px",
+                sm: "20px",
+                md: "30px",
+              },
+            }}
+          >
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Filter
+                label="Категория"
+                options={[
+                  "Bug",
+                  "Feature",
+                  "Documentation",
+                  "Refactor",
+                  "Test",
+                ]}
+                value={filters.category}
+                onChange={(value) => dispatch(setFilter({ category: value }))}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Filter
+                label="Статус"
+                options={["To Do", "In Progress", "Done"]}
+                value={filters.status}
+                onChange={(value) => dispatch(setFilter({ status: value }))}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Filter
+                label="Приоритет"
+                options={["Low", "Medium", "High"]}
+                value={filters.priority}
+                onChange={(value) => dispatch(setFilter({ priority: value }))}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            variant="contained"
+            component={Link}
+            to="/task/new"
+            startIcon={<AddIcon />}
+            sx={{
+              height: 40,
+              backgroundColor: "#000",
+              "&:hover": { backgroundColor: "rgba(0,0,0,0.77)" },
+            }}
+          >
+            Создать
+          </Button>
+        </Grid>
 
-    const [categoryFilter, setCategoryFilter] = useState<string>('');
-    const [statusFilter, setStatusFilter] = useState<string>('');
-    const [priorityFilter, setPriorityFilter] = useState<string>('');
-    const [searchQuery, setSearchQuery] = useState<string>(''); // Состояние для поиска
-
-    const filteredTasks = useMemo(() => {
-        return tasks.filter((task) => {
-            return (
-                (categoryFilter === '' || task.category === categoryFilter) &&
-                (statusFilter === '' || task.status === statusFilter) &&
-                (priorityFilter === '' || task.priority === priorityFilter) &&
-                (searchQuery === '' || task.header.toLowerCase().includes(searchQuery.toLowerCase()))
-            );
-        });
-    }, [tasks, categoryFilter, statusFilter, priorityFilter, searchQuery]);
-
-    const selectedTask = useMemo(() => {
-        return tasks.find((task) => task.id === id);
-    }, [id, tasks]);
-
-    const handleEditClick = (task: TaskItemProps) => {
-        navigate(`/task/${task.id}`);
-    };
-
-    const handleCloseDetails = () => {
-        navigate('/');
-    };
-
-    const handleSaveTask = (editedTask: TaskItemProps) => {
-        setTasks((prev) =>
-            prev.map((t) => (t.id === editedTask.id ? editedTask : t))
-        );
-        handleCloseDetails();
-    };
-
-    return (
-        <div className={styles.container}>
-            <Header />
-            <main>
-                <SearchLine value={searchQuery} onChange={setSearchQuery} />
-                <Grid container spacing={2} sx={{ mb: 2 }}>
-                    <Grid size={{xs:12, sm: 4}}>
-                        <Filter
-                            label="Категория"
-                            options={['Bug', 'Feature', 'Documentation', 'Refactor', 'Test']}
-                            value={categoryFilter}
-                            onChange={setCategoryFilter}
-                        />
-                    </Grid>
-                    <Grid size={{xs:12, sm: 4}}>
-                        <Filter
-                            label="Статус"
-                            options={['To Do', 'In Progress', 'Done']}
-                            value={statusFilter}
-                            onChange={setStatusFilter}
-                        />
-                    </Grid>
-                    <Grid size={{xs:12, sm: 4}}>
-                        <Filter
-                            label="Приоритет"
-                            options={['Low', 'Medium', 'High']}
-                            value={priorityFilter}
-                            onChange={setPriorityFilter}
-                        />
-                    </Grid>
-                </Grid>
-                <TaskList tasks={filteredTasks} onEdit={handleEditClick} />
-            </main>
-
-            {selectedTask && (
-                <TaskDetails
-                    open={Boolean(selectedTask)}
-                    task={selectedTask}
-                    onClose={handleCloseDetails}
-                    onSave={handleSaveTask}
-                />
-            )}
-        </div>
-    );
+        <TaskList />
+      </main>
+    </div>
+  );
 };

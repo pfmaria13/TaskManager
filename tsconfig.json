@@ -13,8 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["vite/client"],
-    "baseUrl": "src"
+    "types": ["vite/client", "node"],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "@entities/*": ["entities/*"],
+      "@features/*": ["features/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules"]
