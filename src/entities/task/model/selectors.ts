@@ -3,11 +3,18 @@ import { RootState } from "@/app/store";
 
 const selectTaskState = (state: RootState) => state.tasks;
 
+
 export const selectTasks = createSelector(
   [selectTaskState],
   (taskState) => taskState.tasks,
 );
 
+/**
+ * Селектор для получения отфильтрованных задач
+ * Фильтрация происходит по категории, статусу, приоритету и поисковому запросу
+ * Если tasks не является массивом, возвращает пустой массив
+ * @returns {Task[]} - Отфильтрованный массив задач
+ */
 export const selectFilteredTasks = createSelector(
   [selectTaskState],
   (taskState) => {

@@ -3,6 +3,10 @@ import { useSelector } from "react-redux";
 import { selectFilteredTasks } from "@entities/task/model/selectors";
 import { TaskItem } from "./TaskItem";
 
+/**
+ * Компонент списка отфильтрованных задач
+ * @return {JSX.Element} - сетка с компонентами задач TaskItem
+ */
 export const TaskList = () => {
   const tasks = useSelector(selectFilteredTasks);
 

@@ -2,6 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Task, TaskState } from "./types";
 import { v4 as uuidv4 } from "uuid";
 
+/**
+ * Проверяет, является ли переданный объект валидной задачей
+ * @param task Неизвестный объект для проверки
+ * @returns {boolean} Возвращает true, если объект соответствует интерфейсу Task
+ */
 const isValidTask = (task: unknown): task is Task => {
   if (typeof task !== "object" || task === null) return false;
 
@@ -18,7 +23,14 @@ const isValidTask = (task: unknown): task is Task => {
   );
 };
 
-
+/**
+ * Получает начальный список задач из localStorage с валидацией и сортировкой
+ * @remarks
+ * Загружает задачи из localStorage, проверяет их валидность
+ * с помощью isValidTask, сортирует по дате создания (от новых к старым) и сохраняет
+ * очищенные данные обратно в localStorage при необходимости
+ * @returns {Task[]} Массив валидных задач
+ */
 const getInitialTasks = (): Task[] => {
   try {
     const storedTasks = localStorage.getItem("tasks");
@@ -44,6 +56,10 @@ const getInitialTasks = (): Task[] => {
   }
 };
 
+/**
+ * Сохраняет задачи в localStorage с проверкой на валидность
+ * @param tasks Массив задач для сохранения
+ */
 const saveTasksToLocalStorage = (tasks: Task[]) => {
   if (!Array.isArray(tasks)) {
     console.error("Попытка сохранить не массив в localStorage:", tasks);

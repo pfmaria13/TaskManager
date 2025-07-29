@@ -8,6 +8,14 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
+/**
+ * Интерфейс пропсов для компонента фильтра
+ * @interface FilterProps
+ * @property {string} label - Название фильтра (например, "Категория")
+ * @property {string[]} options - Массив доступных опций для выбора
+ * @property {string} value - Текущее значение фильтра
+ * @property {(value: string) => void} onChange - Функция обработки изменения значения
+ */
 interface FilterProps {
   label: string;
   options: string[];
@@ -15,6 +23,11 @@ interface FilterProps {
   onChange: (value: string) => void;
 }
 
+/**
+ * Компонент выпадающего фильтра с возможностью очистки
+ * @param {FilterProps} props - Пропсы компонента
+ * @returns {JSX.Element} - Выпадающий список с кнопкой очистки
+ */
 export const Filter = ({ label, options, value, onChange }: FilterProps) => {
   const handleChange = (event: SelectChangeEvent<string>) => {
     onChange(event.target.value);

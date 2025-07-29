@@ -1,69 +1,50 @@
-# React + TypeScript + Vite
+# Приложение для управления задачами
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это приложение для управления задачами, разработанное для создания, редактирования, удаления и фильтрации задач.
 
-Currently, two official plugins are available:
+# Описание реализованного функционала:
+- Создание, редактирование и удаление задач с подтверждением.
+- Фильтрация по категории, статусу, приоритету и поиску.
+- Адаптивный дизайн с сеткой задач.
+- Сохранение данных в локальном хранилище.
+- Модальные окна для создания и редактирования.
+- Обновления в реальном времени.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Клонирование репозитория**:
+   ```bash
+   git clone <ваша-ссылка-на-репозиторий>
+   cd <название-репозитория>
+   
+2. **Установка: Установите Node.js (14.x+) и выполните:**
+    ```npm install
 
-## Expanding the ESLint configuration
+3. **Запуск проекта**
+    ```npm run dev
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Используемые технологии и подходы
+- React: Основной фреймворк для интерфейса.
+- TypeScript: Для типизации.
+- Redux Toolkit: Управление состоянием.
+- Material-UI: Стилизация.
+- React Router: Навигация.
+- UUID: Генерация ID.
+- ESLint: Стандарты кода.
+- Локальное хранилище: Сохранение данных.
+- Vite: Быстрая сборка и разработка.
 
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+# Подходы:
+- Архитектура Feature-Sliced.
+- JSDoc для документации.
+- Адаптивная верстка с Grid и Flexbox.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+# Краткое описание применённой архитектуры
+Проект построен на основе архитектуры Feature-Sliced:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+- entities/: Логика и данные (например, task).
+- features/: Функциональные блоки (например, фильтры).
+- shared/: Общие компоненты.
+- pages/: Главные страницы.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Redux Toolkit: Управление состоянием.
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+**Пример доступен по ссылке: https://task-manager-k4mk7qdkd-pfmaria13s-projects.vercel.app/**

@@ -1,5 +1,9 @@
 import styles from "./Header.module.css";
 
+/**
+ * Компонент заголовка
+ * @returns {JSX.Element} - Заголовок
+ */
 export const Header = () => {
   return (
     <>

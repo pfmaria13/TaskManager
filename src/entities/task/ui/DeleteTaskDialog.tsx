@@ -10,12 +10,24 @@ import { useDispatch } from "react-redux";
 import { deleteTask } from "../model/taskSlice";
 import { Task } from "../model/types";
 
+/**
+ * Интерфейс пропсов для компонента модального окна подтверждения удаления задачи
+ * @interface DeleteTaskDialogProps
+ * @property {boolean} isOpen - Флаг открытого состояния окна
+ * @property {() => void} onClose - Функция для закрытия окна
+ * @property {Task} task - Задача, которую нужно удалить
+ */
 interface DeleteTaskDialogProps {
   isOpen: boolean;
   onClose: () => void;
   task: Task;
 }
 
+/**
+ * Компонент модального окна для подтверждения удаления задачи
+ * @param {DeleteTaskDialogProps} props - Пропсы компонента
+ * @returns {JSX.Element} - Модальное окно с подтверждением
+ */
 export const DeleteTaskDialog = ({
   isOpen,
   onClose,

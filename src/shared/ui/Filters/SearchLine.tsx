@@ -3,11 +3,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import { ChangeEvent } from "react";
 
+/**
+ * Интерфейс пропсов для компонента строки поиска
+ * @interface SearchLineProps
+ * @property {string} value - Текущее значение поискового запроса
+ * @property {(value: string) => void} onChange - Функция обработки изменения значения
+ */
 interface SearchLineProps {
   value: string;
   onChange: (value: string) => void;
 }
 
+/**
+ * Компонент строки поиска с иконками поиска и очистки
+ * @param {SearchLineProps} props - Пропсы компонента
+ * @returns {JSX.Element} - Поле ввода с иконками
+ */
 export const SearchLine = ({ value, onChange }: SearchLineProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);

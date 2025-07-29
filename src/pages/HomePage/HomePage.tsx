@@ -10,6 +10,11 @@ import { selectFilters } from "@entities/task/model/selectors";
 import styles from "./HomePage.module.css";
 import AddIcon from "@mui/icons-material/Add";
 
+/**
+ * Компонент главной страницы приложения
+ * Отображает строку поиска, фильтры и список задач
+ * @return {JSX.Element} - Главная страница
+ */
 export const HomePage = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);

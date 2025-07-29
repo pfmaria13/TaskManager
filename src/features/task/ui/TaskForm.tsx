@@ -12,11 +12,24 @@ import { createTask, updateTask } from "@entities/task/model/taskSlice";
 import { Task } from "@entities/task/model/types";
 import { ChangeEvent } from "react";
 
+/**
+ * Интерфейс пропсов для компонента формы создания или редактирования задачи
+ * @interface TaskFormProps
+ * @property {Task} [task] - Задача для редактирования (опционально)
+ * @property {boolean} isNewTask - Флаг, указывающий, создается ли новая задача
+ *
+ */
 interface TaskFormProps {
   task?: Task;
   isNewTask: boolean;
 }
 
+/**
+ * Компонент формы создания/редактирования задачи
+ * Включает валидацию заголовка и обработку сохранения
+ * @param {TaskFormProps} props - Пропсы компонента
+ * @return {JSX.Element} - Форма с полями для задачи
+ */
 export const TaskForm = ({ task, isNewTask }: TaskFormProps) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<Partial<Task>>({

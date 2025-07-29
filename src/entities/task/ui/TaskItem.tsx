@@ -13,6 +13,11 @@ import { DeleteTaskDialog } from "./DeleteTaskDialog";
 import styles from "./TaskItem.module.css";
 import { Task } from "@entities/task/model/types";
 
+/**
+ * Компонент карточки задачи.
+ * @param {TaskItemProps} props - Данные задачи.
+ * @returns {JSX.Element} - Карточка с информацией о задаче и кнопками.
+ */
 export const TaskItem = (props: Task) => {
   const { id, title, description, category, status, priority, createdAt } =
     props;
@@ -22,12 +27,23 @@ export const TaskItem = (props: Task) => {
     setIsDeleteDialogOpen(true);
   };
 
+  /**
+   * Определяет цвет для чипа статуса задачи
+   * @remarks
+   * Использует объект для маппинга статусов задач на
+   * соответствующие цвета, чтобы визуально различать статусы в интерфейсе
+   */
   const statusColor: Record<Task["status"], string> = {
     "To Do": "default",
     "In Progress": "#c9dffd",
     Done: "#dcf3d8",
   };
 
+  /**
+   * Форматирует метку приоритета для отображения в чипе
+   * @param priority Приоритет задачи
+   * @returns Отформатированная строка с визуальными индикаторами приоритета
+   */
   const getPriorityLabel = (priority: Task["priority"]) => {
     switch (priority) {
       case "Low":
